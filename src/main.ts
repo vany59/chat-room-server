@@ -3,6 +3,7 @@ import { AppModule } from './app.module';
 import { ConfigService } from '@nestjs/config';
 import helmet from 'helmet';
 import * as compression from 'compression';
+import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -12,6 +13,20 @@ async function bootstrap() {
   app.use(compression());
 
   const configService = app.get(ConfigService);
+
+  const env = configService.get<string>('NODE_ENV');
+
+  if (env === 'development') {
+    const swaggerConfig = new DocumentBuilder()
+      .setTitle('Chat room API')
+      .setDescription('The Chat room API documentation')
+      .setVersion('1.0')
+      .build();
+
+    const documentFactory = () =>
+      SwaggerModule.createDocument(app, swaggerConfig);
+    SwaggerModule.setup('swagger', app, documentFactory);
+  }
 
   const trustedDomain = configService.get<string>('TRUSTED_DOMAIN');
   app.enableCors({
