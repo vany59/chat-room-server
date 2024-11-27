@@ -25,6 +25,12 @@ class EnvironmentVariables {
 
   @IsString()
   TRUSTED_DOMAIN: string;
+
+  @IsNumber()
+  THROTTLE_TTL: number;
+
+  @IsNumber()
+  THROTTLE_LIMIT: number;
 }
 
 export function validate(config: Record<string, unknown>) {
