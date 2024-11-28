@@ -1,7 +1,9 @@
 import { plainToInstance } from 'class-transformer';
 import {
+  IsBoolean,
   IsEnum,
   IsNumber,
+  IsOptional,
   IsString,
   Max,
   Min,
@@ -31,6 +33,25 @@ class EnvironmentVariables {
 
   @IsNumber()
   THROTTLE_LIMIT: number;
+
+  @IsString()
+  POSTGRES_HOST: string;
+
+  @IsNumber()
+  POSTGRES_PORT: number;
+
+  @IsString()
+  POSTGRES_USER: string;
+
+  @IsString()
+  POSTGRES_PASSWORD: string;
+
+  @IsString()
+  POSTGRES_CHAT_DB_NAME: string;
+
+  @IsOptional()
+  @IsBoolean()
+  POSTGRES_SYNC?: boolean;
 }
 
 export function validate(config: Record<string, unknown>) {

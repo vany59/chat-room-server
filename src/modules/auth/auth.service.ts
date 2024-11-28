@@ -5,8 +5,8 @@ import { UsersService } from '../users/users.service';
 export class AuthService {
   constructor(private usersService: UsersService) {}
 
-  async signIn(username: string): Promise<any> {
-    const user = await this.usersService.findOne(username);
+  async signIn(userName: string): Promise<any> {
+    const user = await this.usersService.findByUserName(userName);
     if (user) {
       throw new UnauthorizedException();
     }
