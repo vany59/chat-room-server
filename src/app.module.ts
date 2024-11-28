@@ -9,6 +9,7 @@ import { AuthModule } from './modules/auth/auth.module';
 import { APP_GUARD } from '@nestjs/core';
 import { AuthGuard } from './modules/auth/auth.guard';
 import { DatabaseModule } from './database/database.module';
+import { UsersModule } from './modules/users/users.module';
 
 @Module({
   imports: [
@@ -30,6 +31,7 @@ import { DatabaseModule } from './database/database.module';
     }),
     DatabaseModule,
     AuthModule,
+    UsersModule.forRoot(),
   ],
   controllers: [AppController],
   providers: [

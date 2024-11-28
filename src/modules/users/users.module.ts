@@ -1,8 +1,17 @@
-import { Module } from '@nestjs/common';
+import { DynamicModule, Module } from '@nestjs/common';
 import { UsersService } from './users.service';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { User } from './user.entity';
 
-@Module({
-  providers: [UsersService],
-  exports: [UsersService],
-})
-export class UsersModule {}
+@Module({})
+export class UsersModule {
+  static forRoot(): DynamicModule {
+    return {
+      module: UsersModule,
+      imports: [TypeOrmModule.forFeature([User])],
+      providers: [UsersService],
+      exports: [UsersService],
+      global: true,
+    };
+  }
+}
