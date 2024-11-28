@@ -1,14 +1,33 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { DataSource, Repository } from 'typeorm';
 import { User } from './user.entity';
 
 @Injectable()
 export class UsersService {
   constructor(
     @InjectRepository(User)
-    private usersRepository: Repository<User>,
+    private readonly usersRepository: Repository<User>,
+    private readonly dataSource: DataSource,
   ) {}
+
+  async create({ userName }: { userName: string }) {
+    const queryRunner = this.dataSource.createQueryRunner();
+    await queryRunner.connect();
+    await queryRunner.startTransaction();
+    try {
+      const user = new User();
+      user.userName = userName;
+      await queryRunner.manager.save(user);
+      await queryRunner.commitTransaction();
+      return user;
+    } catch (err) {
+      console.log('error', err);
+      await queryRunner.rollbackTransaction();
+    } finally {
+      await queryRunner.release();
+    }
+  }
 
   findAll(): Promise<User[]> {
     return this.usersRepository.find();

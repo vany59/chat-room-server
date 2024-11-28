@@ -37,6 +37,7 @@ import { JwtModule } from '@nestjs/jwt';
         secretOrPrivateKey: config.get('JWT_SECRET'),
         signOptions: { expiresIn: config.get('JWT_EXPIRATION') },
       }),
+      global: true,
     }),
     DatabaseModule,
     AuthModule,
