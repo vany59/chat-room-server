@@ -16,4 +16,8 @@ export default () => ({
       synchronize: Boolean(process.env.POSTGRES_SYNC), // shouldn't be used in production
     },
   },
+  jwt: {
+    secret: process.env.JWT_SECRET,
+    expiration: process.env.JWT_EXPIRATION,
+  },
 });

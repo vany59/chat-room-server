@@ -10,6 +10,7 @@ import { APP_GUARD } from '@nestjs/core';
 import { AuthGuard } from './modules/auth/auth.guard';
 import { DatabaseModule } from './database/database.module';
 import { UsersModule } from './modules/users/users.module';
+import { JwtModule } from '@nestjs/jwt';
 
 @Module({
   imports: [
@@ -28,6 +29,14 @@ import { UsersModule } from './modules/users/users.module';
           limit: config.get<number>('THROTTLE_LIMIT'),
         },
       ],
+    }),
+    JwtModule.registerAsync({
+      imports: [ConfigModule],
+      inject: [ConfigService],
+      useFactory: (config: ConfigService) => ({
+        secretOrPrivateKey: config.get('JWT_SECRET'),
+        signOptions: { expiresIn: config.get('JWT_EXPIRATION') },
+      }),
     }),
     DatabaseModule,
     AuthModule,

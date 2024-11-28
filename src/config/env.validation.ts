@@ -52,6 +52,12 @@ class EnvironmentVariables {
   @IsOptional()
   @IsBoolean()
   POSTGRES_SYNC?: boolean;
+
+  @IsString()
+  JWT_SECRET: string;
+
+  @IsString()
+  JWT_EXPIRATION: string;
 }
 
 export function validate(config: Record<string, unknown>) {
