@@ -11,6 +11,7 @@ import { AuthGuard } from './modules/auth/auth.guard';
 import { DatabaseModule } from './database/database.module';
 import { UsersModule } from './modules/users/users.module';
 import { JwtModule } from '@nestjs/jwt';
+import { RoomModule } from './modules/rooms/room.module';
 
 @Module({
   imports: [
@@ -42,6 +43,7 @@ import { JwtModule } from '@nestjs/jwt';
     DatabaseModule,
     AuthModule,
     UsersModule.forRoot(),
+    RoomModule,
   ],
   controllers: [AppController],
   providers: [
