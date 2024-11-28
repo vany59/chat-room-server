@@ -20,7 +20,7 @@ export class AuthService {
       throw new BadRequestException('Wrong user name');
     }
 
-    const payload = { sub: user.id, userName: user.userName };
+    const payload = { id: user.id, userName: user.userName };
     return {
       accessToken: await this.jwtService.signAsync(payload),
     };
@@ -39,7 +39,7 @@ export class AuthService {
       throw new InternalServerErrorException();
     }
 
-    const payload = { sub: user.id, userName: user.userName };
+    const payload = { id: user.id, userName: user.userName };
     return {
       accessToken: await this.jwtService.signAsync(payload),
     };
