@@ -12,6 +12,7 @@ import { DatabaseModule } from './database/database.module';
 import { UsersModule } from './modules/users/users.module';
 import { JwtModule } from '@nestjs/jwt';
 import { RoomModule } from './modules/rooms/room.module';
+import { MessageModule } from './modules/messages/message.module';
 
 @Module({
   imports: [
@@ -42,8 +43,9 @@ import { RoomModule } from './modules/rooms/room.module';
     }),
     DatabaseModule,
     AuthModule,
-    UsersModule.forRoot(),
+    UsersModule,
     RoomModule,
+    MessageModule,
   ],
   controllers: [AppController],
   providers: [

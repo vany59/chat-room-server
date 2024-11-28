@@ -9,6 +9,7 @@ import {
 } from 'typeorm';
 import { RoomParticipant } from './room-participant.entity';
 import { User } from '../users/user.entity';
+import { Message } from '../messages/message.entity';
 
 @Entity('rooms')
 export class Room {
@@ -29,4 +30,7 @@ export class Room {
 
   @OneToMany(() => RoomParticipant, (participant) => participant.room)
   participants: RoomParticipant[];
+
+  @OneToMany(() => Message, (message) => message.room)
+  messages: Message[]; // Relationship with messages
 }

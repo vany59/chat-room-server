@@ -8,11 +8,12 @@ import {
 } from 'typeorm';
 import { Room } from '../rooms/room.entity';
 import { RoomParticipant } from '../rooms/room-participant.entity';
+import { Message } from '../messages/message.entity';
 
 @Entity('users')
 export class User {
   @PrimaryGeneratedColumn('uuid')
-  id: number;
+  id: string;
 
   @Column({ unique: true })
   userName: string;
@@ -28,4 +29,7 @@ export class User {
 
   @OneToMany(() => RoomParticipant, (participant) => participant.user)
   participatingRooms: RoomParticipant[];
+
+  @OneToMany(() => Message, (message) => message.room)
+  messages: Message[];
 }

@@ -33,7 +33,7 @@ export class UsersService {
     return this.usersRepository.find();
   }
 
-  findById(id: number): Promise<User | null> {
+  findById(id: string): Promise<User | null> {
     return this.usersRepository.findOneBy({ id });
   }
 
