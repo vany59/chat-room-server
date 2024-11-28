@@ -5,6 +5,9 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import configuration from './config/configuration';
 import { validate } from './config/env.validation';
 import { ThrottlerModule } from '@nestjs/throttler';
+import { AuthModule } from './modules/auth/auth.module';
+import { APP_GUARD } from '@nestjs/core';
+import { AuthGuard } from './modules/auth/auth.guard';
 
 @Module({
   imports: [
@@ -24,8 +27,16 @@ import { ThrottlerModule } from '@nestjs/throttler';
         },
       ],
     }),
+
+    AuthModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [
+    AppService,
+    {
+      provide: APP_GUARD,
+      useClass: AuthGuard,
+    },
+  ],
 })
 export class AppModule {}
