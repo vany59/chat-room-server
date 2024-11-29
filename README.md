@@ -17,6 +17,63 @@ This document outlines the key features, architectural approach, and setup instr
     * Notify participants when users join/leave rooms or send messages.
 
 ## Architectural Approach: Modular Monolith
+Folder structure:
+
+```
+src/
+├── app.controller.spec.ts
+├── app.controller.ts
+├── app.module.ts
+├── app.service.ts
+├── common
+│   └── decorators.ts
+├── config
+│   ├── configuration.ts
+│   ├── env.validation.ts
+│   └── type-orm.ts
+├── database
+│   ├── database.module.ts
+│   └── migrations
+│       └── 1732818661089-user.ts
+├── events
+│   ├── dto
+│   │   ├── join-room.dto.ts
+│   │   ├── leave-room.dto.ts
+│   │   └── new-message.dto.ts
+│   ├── events.gateway.ts
+│   └── events.module.ts
+├── main.ts
+├── migrations
+└── modules
+    ├── auth
+    │   ├── auth.controller.spec.ts
+    │   ├── auth.controller.ts
+    │   ├── auth.dto.ts
+    │   ├── auth.guard.ts
+    │   ├── auth.module.ts
+    │   ├── auth.service.spec.ts
+    │   └── auth.service.ts
+    ├── messages
+    │   ├── dto
+    │   ├── message.controller.ts
+    │   ├── message.entity.ts
+    │   ├── message.module.ts
+    │   └── message.service.ts
+    ├── rooms
+    │   ├── dto
+    │   ├── room-participant.entity.ts
+    │   ├── room.controller.spec.ts
+    │   ├── room.controller.ts
+    │   ├── room.entity.ts
+    │   ├── room.module.ts
+    │   ├── room.service.ts
+    │   └── rooms.service.spec.ts
+    └── users
+        ├── user.entity.ts
+        ├── users.module.ts
+        ├── users.service.spec.ts
+        └── users.service.ts
+```
 Why Choose Modular Monolith?
 A modular monolithic architecture offers a clean and scalable structure while remaining straightforward to implement. Here’s why it’s a great fit for this project:
 
@@ -31,6 +88,8 @@ A modular monolithic architecture offers a clean and scalable structure while re
     * Future-proof: Modules can transition to microservices if the need arises.
 4. Ease of Maintenance
     * Modular design allows independent development, testing, and maintenance of features.
+
+
 
 ## Project setup
 
