@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { EventsGateway } from './events.gatewate';
+import { EventsGateway } from './events.gateway';
 import { MessageModule } from '../modules/messages/message.module';
 import { UsersModule } from '../modules/users/users.module';
 import { RoomModule } from '../modules/rooms/room.module';
