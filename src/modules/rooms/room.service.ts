@@ -9,6 +9,7 @@ import { Room } from './room.entity';
 import { CreateRoomDto } from './dto/create-room.dto';
 import { User } from '../users/user.entity';
 import { RoomParticipant } from './room-participant.entity';
+import { UpdateRoomDto } from './dto/update-room.dto';
 
 @Injectable()
 export class RoomService {
@@ -40,6 +41,10 @@ export class RoomService {
     await this.roomParticipantRepository.save(participant);
 
     return savedRoom;
+  }
+
+  async updateRoom(updateRoom: UpdateRoomDto) {
+    return this.roomRepository.save(updateRoom);
   }
 
   async getAllRooms(): Promise<Room[]> {
@@ -76,5 +81,13 @@ export class RoomService {
       throw new ForbiddenException('You can only delete rooms you created');
     }
     await this.roomRepository.remove(room);
+  }
+
+  async findRoomByUser(roomId: string, userId: string) {
+    const room = await this.roomRepository.findOne({
+      where: { id: roomId },
+      relations: ['creator'],
+    });
+    return room?.creator?.id === userId;
   }
 }

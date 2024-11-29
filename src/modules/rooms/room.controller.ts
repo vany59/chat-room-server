@@ -7,12 +7,14 @@ import {
   Delete,
   Request,
   BadRequestException,
+  Put,
 } from '@nestjs/common';
 import { RoomService } from './room.service';
 import { CreateRoomDto } from './dto/create-room.dto';
 import { JoinRoomDto } from './dto/join-room.dto';
 import { ApiBearerAuth } from '@nestjs/swagger';
 import { DeleteRoomDto } from './dto/delete-room.dto';
+import { UpdateRoomDto, UpdateRoomParamDto } from './dto/update-room.dto';
 
 @Controller('rooms')
 @ApiBearerAuth('JWT-auth')
@@ -28,6 +30,20 @@ export class RoomController {
       throw new BadRequestException('Room name already exists');
     }
     return this.roomService.createRoom(createRoomDto, request.user);
+  }
+
+  @Put(':id')
+  async updateRoom(
+    @Request() request,
+    @Param() params: UpdateRoomParamDto,
+    @Body() updateRoomDto: UpdateRoomDto,
+  ) {
+    const roomId = params.id;
+    const room = await this.roomService.findRoomByUser(roomId, request.user.id);
+    if (!room) {
+      throw new BadRequestException('Room does not exists');
+    }
+    return this.roomService.updateRoom(updateRoomDto);
   }
 
   @Get()
