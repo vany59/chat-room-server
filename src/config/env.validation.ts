@@ -25,6 +25,11 @@ class EnvironmentVariables {
   @Max(65535)
   PORT: number;
 
+  @IsNumber()
+  @Min(0)
+  @Max(65535)
+  WS_PORT: number;
+
   @IsString()
   TRUSTED_DOMAIN: string;
 

@@ -13,6 +13,7 @@ import { UsersModule } from './modules/users/users.module';
 import { JwtModule } from '@nestjs/jwt';
 import { RoomModule } from './modules/rooms/room.module';
 import { MessageModule } from './modules/messages/message.module';
+import { EventsModule } from './events/events.module';
 
 @Module({
   imports: [
@@ -46,6 +47,7 @@ import { MessageModule } from './modules/messages/message.module';
     UsersModule,
     RoomModule,
     MessageModule,
+    EventsModule,
   ],
   controllers: [AppController],
   providers: [
