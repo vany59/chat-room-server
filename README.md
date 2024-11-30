@@ -131,8 +131,30 @@ $ yarn run test:cov
 ```
 docker-compose up -d
 ```
-Note: Ensure that the POSTGRES_HOST environment variable is set to `postgres-db`, which matches the `container_name` defined in the `docker-compose.yml` file
 
+## Environment variables
+The following is an example .env file for configuring the environment variables required by the application. Each variable is described to ensure clarity on its purpose and correct usage.
+```
+TRUSTED_DOMAIN=*  
+NODE_ENV=development  
+PORT=3000  
+THROTTLE_TTL=60000  
+THROTTLE_LIMIT=100  
+
+POSTGRES_HOST=postgres-db  
+POSTGRES_PORT=5432  
+POSTGRES_USER=postgres  
+POSTGRES_PASSWORD=123456  
+POSTGRES_CHAT_DB_NAME=test  
+POSTGRES_SYNC=true  
+
+JWT_SECRET=39e9a71d25227ee66e92af54614bfa9e8fe13a165cebd3599a69d93df834ba97eccfe1eb6709bac71adc441f258a6ee8fc57b1565b12ab7ee61eac6b52c11b36adaaf382963fa73b0b97ef0ab9826481d4dc00c9a197054a5e7b6f15a0912036ff5de9a2339ba8f40554e27328535951a3d5060528a1aeb06c916b301eb54539a263521a71856a6d7b318eca488be4655025a6b05c3c632f8dd473fe62491803000e7a69ff4fdf0b5dbb197be2747b1398e047f150b5175304b4d805f1536ac27c043bcab88e56d23e04992adb9d015a55e8470aa442f050a67de4c5a5ee60fba5ae9c3af3e0af6e77960f4e872bc5b4ee6cae92375550fd9d1fa82471981105  
+JWT_EXPIRATION=1d  
+
+WS_PORT=3001  
+
+```
+Note: For docker-compose, ensure that the POSTGRES_HOST environment variable is set to `postgres-db`, which matches the `container_name` defined in the `docker-compose.yml` 
 ## API Documentation
 This project uses Swagger for API documentation.
 Access the Swagger UI at: `<API_HOST>/swagger`
