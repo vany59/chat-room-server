@@ -123,6 +123,16 @@ $ yarn run test:e2e
 $ yarn run test:cov
 ```
 
+## Run with docker
+### Prerequisites
+* Install Docker on your system.
+* Install Docker Compose for multi-container setups
+### Run
+```
+docker-compose up -d
+```
+Note: Ensure that the POSTGRES_HOST environment variable is set to `postgres-db`, which matches the `container_name` defined in the `docker-compose.yml` file
+
 ## API Documentation
 This project uses Swagger for API documentation.
 Access the Swagger UI at: `<API_HOST>/swagger`
